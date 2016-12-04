@@ -24,4 +24,18 @@ public class BoardService {
     public List<Board> getBoardList() {
         return boardRepo.findAll();
     }
+
+    public boolean addBoard(String name) {
+        Board board = boardRepo.findByName(name);
+        if (board != null) {
+            return false;
+        }
+
+        board = new Board();
+        board.setName(name);
+
+        boardRepo.saveAndFlush(board);
+
+        return true;
+    }
 }

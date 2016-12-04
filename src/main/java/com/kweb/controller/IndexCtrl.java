@@ -13,4 +13,9 @@ public class IndexCtrl {
     public String getIndex() {
         return "index";
     }
+
+    @GetMapping("/admin")
+    public String getAdmin() {
+        return "admin";
+    }
 }

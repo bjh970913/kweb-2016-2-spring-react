@@ -34,9 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/join").anonymous()
                 .antMatchers("/loginOnly").hasAuthority(UserRoles.ROLE_USER.toString())
                 .antMatchers("/admin/**").hasAuthority(UserRoles.ROLE_ADMIN.toString())
-                .antMatchers("/write").hasAnyAuthority(
-                UserRoles.ROLE_USER.toString(), UserRoles.ROLE_ADMIN.toString()
-        )
+                .antMatchers("/write").hasAnyAuthority(UserRoles.ROLE_USER.toString(), UserRoles.ROLE_ADMIN.toString())
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
