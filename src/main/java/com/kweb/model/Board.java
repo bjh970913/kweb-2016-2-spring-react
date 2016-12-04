@@ -20,6 +20,6 @@ public class Board {
     @Column
     private String name;
 
-    @OneToMany(targetEntity = Post.class)
+    @OneToMany(targetEntity = Post.class, cascade = CascadeType.REMOVE)
     private Set<Post> posts = new HashSet<>();
 }

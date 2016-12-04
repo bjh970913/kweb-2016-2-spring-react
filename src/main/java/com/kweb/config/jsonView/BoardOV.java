@@ -5,5 +5,8 @@ package com.kweb.config.jsonView;
  * spring-board
  */
 public class BoardOV {
-    public interface list{};
+    public interface list {
+    }
+
+    ;
 }

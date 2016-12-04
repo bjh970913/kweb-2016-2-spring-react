@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by bjh970913 on 05/12/2016.
@@ -25,7 +24,7 @@ public class BoardCtrl {
         this.boardService = boardService;
     }
 
-    @GetMapping(name="/board", produces = "application/json")
+    @GetMapping(name = "/board", produces = "application/json")
     @ResponseBody
     @JsonView(BoardOV.list.class)
     public List<Board> getBoards() {

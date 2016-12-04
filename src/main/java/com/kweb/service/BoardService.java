@@ -5,8 +5,9 @@ import com.kweb.model.Repository.BoardRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by bjh970913 on 05/12/2016.
@@ -25,6 +26,10 @@ public class BoardService {
         return boardRepo.findAll();
     }
 
+    public Board getBoardById(long id) {
+        return boardRepo.findById(id);
+    }
+
     public boolean addBoard(String name) {
         Board board = boardRepo.findByName(name);
         if (board != null) {
@@ -35,6 +40,17 @@ public class BoardService {
         board.setName(name);
 
         boardRepo.saveAndFlush(board);
+
+        return true;
+    }
+
+    public boolean removeBoard(long id) {
+        Board board = boardRepo.findById(id);
+        if (board != null) {
+            return false;
+        }
+
+        boardRepo.delete(board);
 
         return true;
     }
