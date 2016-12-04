@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>General Register From</title>
+</head>
+<body>
+<!--/*@thymesVar id="userJoinForm" type="com.kweb.form.UserJoinForm"*/-->
+<form action="#" th:action="@{/join}" th:object="${userJoinForm}" method="post">
+    <table>
+        <tr>
+            <td>Email:</td>
+            <td>
+                <label>
+                    <input type="text" th:field="*{email}"/>
+                </label>
+            </td>
+            <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td>
+                <label>
+                    <input type="text" th:field="*{passwordOrig}"/>
+                </label>
+            </td>
+            <td th:if="${#fields.hasErrors('passwordOrig')}" th:errors="*{passwordOrig}"></td>
+        </tr>
+        <tr>
+            <td>Confirm:</td>
+            <td>
+                <label>
+                    <input type="text" th:field="*{passwordConf}"/>
+                </label>
+            </td>
+            <td th:if="${#fields.hasErrors('passwordConf')}" th:errors="*{passwordConf}"></td>
+        </tr>
+        <tr>
+            <td>Submit</td>
+            <td><input type="submit"/></td>
+        </tr>
+    </table>
+    <div>
+        <p th:each="err : ${#fields.detailedErrors()}"
+           th:text="${err}"
+        ></p>
+    </div>
+</form>
+</body>
+</html>

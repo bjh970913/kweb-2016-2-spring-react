@@ -1,6 +1,6 @@
 package com.kweb.model;
 
-import com.kweb.config.security.ROLES;
+import com.kweb.config.constant.UserRoles;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,11 +11,16 @@ import javax.persistence.*;
  */
 @Data
 @Entity
-public class Roles {
+public class Role {
     @Id
+    @GeneratedValue
     private long id;
 
     @Column
     @Enumerated(EnumType.STRING)
-    private ROLES nameOfRole;
+    private UserRoles name;
+
+    public Role(UserRoles userRoles) {
+        name = userRoles;
+    }
 }

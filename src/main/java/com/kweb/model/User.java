@@ -1,7 +1,7 @@
 package com.kweb.model;
 
-import com.kweb.config.security.ROLES;
 import lombok.Data;
+import lombok.Generated;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +17,7 @@ import java.util.*;
 @Entity
 public class User implements UserDetails {
     @Id
+    @GeneratedValue
     private long id;
 
     @Column
@@ -28,16 +29,16 @@ public class User implements UserDetails {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             joinColumns = {@JoinColumn(table = "User")},
-            inverseJoinColumns = {@JoinColumn(table = "Roles")}
+            inverseJoinColumns = {@JoinColumn(table = "Role")}
     )
-    private Set<Roles> userRoles = new HashSet<>();
+    private Set<Role> userRoles = new HashSet<>();
 
     @Override
     @Transient
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Roles role : userRoles) {
-            authorities.add(new SimpleGrantedAuthority(role.toString()));
+        for (Role role : userRoles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName().toString()));
         }
         return authorities;
     }
