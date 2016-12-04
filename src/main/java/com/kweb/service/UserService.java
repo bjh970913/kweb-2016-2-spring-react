@@ -5,6 +5,8 @@ import com.kweb.model.Repository.UserRepo;
 import com.kweb.model.Role;
 import com.kweb.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.token.Sha512DigestUtils;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,16 @@ public class UserService {
     public UserService(UserRepo userRepo, RoleService roleService) {
         this.userRepo = userRepo;
         this.roleService = roleService;
+    }
+
+    public User getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth == null || auth.getAuthorities().toString().equals("ROLE_ANONYMOUS")) {
+            return null;
+        }
+
+        return getUserByEmail(auth.getName());
     }
 
     public boolean createUser(String email, String password) {
@@ -49,5 +61,9 @@ public class UserService {
 
     public User getUserByEmailAndPasswordHash(String email, String passwordHash) {
         return userRepo.findByEmailAndPasswordHash(email, passwordHash);
+    }
+
+    public User getUserByEmail(String email) {
+        return userRepo.findByEmail(email);
     }
 }

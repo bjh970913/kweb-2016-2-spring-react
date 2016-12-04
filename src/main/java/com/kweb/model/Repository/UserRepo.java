@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * spring-board
  */
 public interface UserRepo extends JpaRepository<User, Long> {
+    User findById(Long id);
+
     User findByEmail(String email);
 
     User findByEmailAndPasswordHash(String email, String passwordHash);

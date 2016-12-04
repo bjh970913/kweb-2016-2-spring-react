@@ -8,5 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * spring-board
  */
 public interface BoardRepo extends JpaRepository<Board, Long> {
+    Board findById(long id);
+
     Board findByName(String name);
 }

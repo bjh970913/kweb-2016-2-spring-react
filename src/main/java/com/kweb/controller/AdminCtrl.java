@@ -1,6 +1,5 @@
 package com.kweb.controller;
 
-import com.kweb.model.Board;
 import com.kweb.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
