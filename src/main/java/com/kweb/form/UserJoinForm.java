@@ -4,7 +4,6 @@ import com.kweb.config.constant.Regexes;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.security.core.token.Sha512DigestUtils;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;

@@ -19,7 +19,7 @@ import java.util.List;
  * spring-board
  */
 @Component
-public class SecurityUserAuthProvider implements AuthenticationProvider{
+public class SecurityUserAuthProvider implements AuthenticationProvider {
     private UserService userService;
 
     @Autowired

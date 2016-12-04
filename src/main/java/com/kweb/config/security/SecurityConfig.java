@@ -2,13 +2,11 @@ package com.kweb.config.security;
 
 import com.kweb.config.constant.UserRoles;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 /**
  * Created by bjh970913 on 05/12/2016.
@@ -16,7 +14,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  */
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private SecurityUserAuthProvider securityUserAuthProvider;
 
     @Autowired
@@ -32,12 +30,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
+                .authorizeRequests()
                 .antMatchers("/join").anonymous()
                 .antMatchers("/loginOnly").hasAuthority(UserRoles.ROLE_USER.toString())
+                .antMatchers("/admin/**").hasAuthority(UserRoles.ROLE_ADMIN.toString())
+                .antMatchers("/write").hasAnyAuthority(
+                UserRoles.ROLE_USER.toString(), UserRoles.ROLE_ADMIN.toString()
+        )
                 .anyRequest().permitAll()
                 .and()
-            .formLogin()
+                .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")
                 .passwordParameter("password")
@@ -46,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .failureUrl("/login")
                 .successHandler(new SecurityAuthSuccessHandler())
                 .and()
-            .logout()
+                .logout()
                 .logoutUrl("/logout").permitAll();
     }
 }

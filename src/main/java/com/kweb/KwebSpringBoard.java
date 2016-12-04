@@ -7,7 +7,7 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 @SpringBootApplication
 public class KwebSpringBoard extends SpringBootServletInitializer {
 
-	public static void main(String[] args) {
-		SpringApplication.run(KwebSpringBoard.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(KwebSpringBoard.class, args);
+    }
 }

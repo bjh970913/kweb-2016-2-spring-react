@@ -29,12 +29,12 @@ public class UserCtrl {
         return "login";
     }
 
-    @GetMapping("join")
+    @GetMapping("/join")
     public String getJoin(UserJoinForm userJoinForm) {
         return "join";
     }
 
-    @PostMapping("join")
+    @PostMapping("/join")
     public String generalRegisterHandler(@Valid UserJoinForm userJoinForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "join";

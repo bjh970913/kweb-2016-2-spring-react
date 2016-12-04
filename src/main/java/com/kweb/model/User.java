@@ -1,13 +1,11 @@
 package com.kweb.model;
 
+import com.kweb.model.Abstract.UserDetailsAbstract;
 import lombok.Data;
-import lombok.Generated;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by bjh970913 on 05/12/2016.
@@ -15,7 +13,7 @@ import java.util.*;
  */
 @Data
 @Entity
-public class User implements UserDetails {
+public class User extends UserDetailsAbstract {
     @Id
     @GeneratedValue
     private long id;
@@ -33,49 +31,6 @@ public class User implements UserDetails {
     )
     private Set<Role> userRoles = new HashSet<>();
 
-    @Override
-    @Transient
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Role role : userRoles) {
-            authorities.add(new SimpleGrantedAuthority(role.getName().toString()));
-        }
-        return authorities;
-    }
-
-    @Override
-    @Transient
-    public String getPassword() {
-        return passwordHash;
-    }
-
-    @Override
-    @Transient
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    @Transient
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    @Transient
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    @Transient
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    @Transient
-    public boolean isEnabled() {
-        return true;
-    }
+    @OneToMany(targetEntity = Post.class)
+    private Set<Post> posts;
 }
