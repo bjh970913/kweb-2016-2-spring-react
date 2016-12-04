@@ -19,8 +19,4 @@ public class Role {
     @Column
     @Enumerated(EnumType.STRING)
     private UserRoles name;
-
-    public Role(UserRoles userRoles) {
-        name = userRoles;
-    }
 }

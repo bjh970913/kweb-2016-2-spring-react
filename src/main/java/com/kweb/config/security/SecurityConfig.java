@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http
             .authorizeRequests()
                 .antMatchers("/join").anonymous()
-                .antMatchers("/loginOnly").hasAnyRole(UserRoles.ROLE_USER.toString())
+                .antMatchers("/loginOnly").hasAuthority(UserRoles.ROLE_USER.toString())
                 .anyRequest().permitAll()
                 .and()
             .formLogin()

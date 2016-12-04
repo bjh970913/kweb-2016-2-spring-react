@@ -23,7 +23,8 @@ public class RoleService {
         Role role = roleRepo.findByName(userRoles);
 
         if (role == null) {
-            role = new Role(userRoles);
+            role = new Role();
+            role.setName(userRoles);
             roleRepo.saveAndFlush(role);
             return role;
         }
