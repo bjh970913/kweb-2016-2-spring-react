@@ -3,8 +3,11 @@ package com.kweb.service;
 import com.kweb.model.Board;
 import com.kweb.model.Post;
 import com.kweb.model.Repository.PostRepo;
+import com.kweb.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 /**
  * Created by bjh970913 on 05/12/2016.
@@ -41,9 +44,24 @@ public class PostService {
         return post;
     }
 
-//    public boolean deletePost(long id){
-//
-//    }
-//
-//    public Set<Post> getPostsByBoardId(long id){}
+    public boolean deletePost(long id){
+        Post post = postRepo.findById(id);
+        User user = userService.getCurrentUser();
+
+        if (post == null || post.getAuthor().equals(user)) {
+            return false;
+        }
+
+        postRepo.delete(post);
+        return true;
+    }
+
+    public Set<Post> getPostsByBoardId(long boardId) {
+        Board board = boardService.getBoardById(boardId);
+        return board.getPosts();
+    }
+
+    public Set<Post> sarchPostsByTitle(String title) {
+        return postRepo.findByTitleLike(title);
+    }
 }

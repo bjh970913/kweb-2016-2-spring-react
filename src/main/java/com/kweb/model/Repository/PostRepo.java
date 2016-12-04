@@ -12,4 +12,5 @@ import java.util.Set;
  */
 public interface PostRepo extends JpaRepository<Post, Long> {
     Post findById(long id);
+    Set<Post> findByTitleLike(String title);
 }
