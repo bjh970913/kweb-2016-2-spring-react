@@ -56,6 +56,10 @@ public class PostService {
         return true;
     }
 
+    public Post getPostsById(long id) {
+        return postRepo.findById(id);
+    }
+
     public Set<Post> getPostsByBoardId(long boardId) {
         Board board = boardService.getBoardById(boardId);
         return board.getPosts();

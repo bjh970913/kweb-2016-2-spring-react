@@ -1,5 +1,7 @@
 package com.kweb.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.kweb.config.jsonView.BoardOV;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,9 +17,11 @@ import java.util.Set;
 public class Board {
     @Id
     @GeneratedValue
+    @JsonView(BoardOV.list.class)
     private long id;
 
     @Column
+    @JsonView(BoardOV.list.class)
     private String name;
 
     @OneToMany(targetEntity = Post.class, cascade = CascadeType.REMOVE)
