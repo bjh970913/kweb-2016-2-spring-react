@@ -10,9 +10,9 @@ module.exports = {
     index: path.join(srcMain, 'index.jsx')
   },
   output: {
-    path: path.join(__dirname, 'src/main/resources/static/js'),
-    filename: '[name].bundle.js',
-    chunkFilename: '[id].bundle.js'
+    path: path.join(__dirname, 'src/main/resources/static/js/bundle'),
+    filename: '[name].js',
+    chunkFilename: '[id].js'
   },
   module: {
     loaders: [

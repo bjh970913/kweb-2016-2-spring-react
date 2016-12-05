@@ -23,3 +23,6 @@ nbdist/
 .nb-gradle/
 .mvn/
 lib/
+node_modules/
+
+src/main/resources/static/js/bundle/
