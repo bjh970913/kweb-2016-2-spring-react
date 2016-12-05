@@ -30,14 +30,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
+            .authorizeRequests()
                 .antMatchers("/join").anonymous()
                 .antMatchers("/loginOnly").hasAuthority(UserRoles.ROLE_USER.toString())
                 .antMatchers("/admin/**").hasAuthority(UserRoles.ROLE_ADMIN.toString())
                 .antMatchers("/write").hasAnyAuthority(UserRoles.ROLE_USER.toString(), UserRoles.ROLE_ADMIN.toString())
                 .anyRequest().permitAll()
                 .and()
-                .formLogin()
+            .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")
                 .passwordParameter("password")
@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login")
                 .successHandler(new SecurityAuthSuccessHandler())
                 .and()
-                .logout()
+            .logout()
                 .logoutUrl("/logout").permitAll();
     }
 }
