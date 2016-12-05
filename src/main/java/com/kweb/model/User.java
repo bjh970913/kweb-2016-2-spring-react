@@ -18,11 +18,11 @@ import java.util.Set;
 public class User extends UserDetailsAbstract {
     @Id
     @GeneratedValue
-    @JsonView(PostOV.postView.class)
+    @JsonView({PostOV.postView.class, PostOV.postSet.class})
     private long id;
 
     @Column
-    @JsonView(PostOV.postView.class)
+    @JsonView({PostOV.postView.class, PostOV.postSet.class})
     private String email;
 
     @Column

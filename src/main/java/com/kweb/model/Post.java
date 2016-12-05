@@ -26,7 +26,7 @@ public class Post {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
-    @JsonView(PostOV.postView.class)
+    @JsonView({PostOV.postSet.class, PostOV.postView.class})
     private User author;
 
     @Column
