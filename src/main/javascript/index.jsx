@@ -1,25 +1,27 @@
 /**
- * Created by bjh970913 on 05/12/2016.
- */
-let React = require('react')
-let ReactDOM = require('react-dom')
-let $ = require('jquery')
-
+  * Created by bjh970913 on 05/12/2016.
+  * spring-board
+  */
+import $ from 'jquery'
 window.$ = $
 
-console.log($)
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-function Item (props) {
-  return (<li>{props.message}</li>);
+import List from './component/List.jsx'
+import Post from './component/Post.jsx'
+import Category from './component/Category.jsx'
+
+class App extends React.Component {
+  render () {
+    return (
+      <div>
+        <Category />
+        <Post />
+        <List />
+      </div>
+    )
+  }
 }
 
-function TodoList () {
-  const todos = ['finish doc', 'submit p', 'nag dan to review']
-  return (
-    <ul>
-      {todos.map((message) => <Item key={message} message={message} />)}
-    </ul>
-  )
-}
-
-ReactDOM.render(<TodoList />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'))

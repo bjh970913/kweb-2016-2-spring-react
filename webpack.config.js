@@ -1,9 +1,9 @@
 /**
- * Created by bjh970913 on 05/12/2016.
- */
-var path = require('path')
-
-var srcMain = path.join(__dirname, 'src/main/javascript')
+  * Created by bjh970913 on 05/12/2016.
+  * spring-board
+  */
+let path = require('path')
+let srcMain = path.join(__dirname, 'src/main/javascript')
 
 module.exports = {
   entry: {
@@ -17,10 +17,14 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: path.join(__dirname, '.'),
-        exclude: /(node_modules)/,
-        loader: 'jsx-loader'
+        test: /\.jsx$/,
+        loader: 'babel',
+        exclude: /node_modules/,
+        options: {
+          cacheDirectory: true,
+          presets: ['es2015', 'react']
+        }
       }
     ]
   }
-};
+}
