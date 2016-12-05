@@ -1,5 +1,7 @@
 package com.kweb.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.kweb.config.jsonView.PostOV;
 import com.kweb.model.Abstract.UserDetailsAbstract;
 import lombok.Data;
 
@@ -16,9 +18,11 @@ import java.util.Set;
 public class User extends UserDetailsAbstract {
     @Id
     @GeneratedValue
+    @JsonView(PostOV.postView.class)
     private long id;
 
     @Column
+    @JsonView(PostOV.postView.class)
     private String email;
 
     @Column
@@ -30,7 +34,4 @@ public class User extends UserDetailsAbstract {
             inverseJoinColumns = {@JoinColumn(table = "Role")}
     )
     private Set<Role> userRoles = new HashSet<>();
-
-    @OneToMany(targetEntity = Post.class)
-    private Set<Post> posts;
 }

@@ -32,6 +32,7 @@ public class UserService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (auth == null || auth.getAuthorities().toString().equals("ROLE_ANONYMOUS")) {
+            System.out.println(auth.getAuthorities().toString());
             return null;
         }
 

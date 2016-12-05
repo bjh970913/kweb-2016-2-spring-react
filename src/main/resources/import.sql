@@ -8,7 +8,6 @@ INSERT INTO `user` VALUES (2, 'user@kweb.com',
 
 INSERT INTO `user_user_roles` VALUES (1, 1);
 INSERT INTO `user_user_roles` VALUES (1, 2);
-
 INSERT INTO `user_user_roles` VALUES (2, 1);
 
 INSERT INTO `board` VALUES (1, 'basic');

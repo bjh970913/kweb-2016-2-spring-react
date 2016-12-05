@@ -1,5 +1,7 @@
 package com.kweb.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.kweb.config.jsonView.PostOV;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,19 +16,24 @@ public class Post {
     @Id
     @Column(name = "PostId")
     @GeneratedValue
+    @JsonView({PostOV.postSet.class, PostOV.postView.class})
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "boardId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
+    @JsonView(PostOV.postView.class)
     private Board board;
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
+    @JsonView(PostOV.postView.class)
     private User author;
 
     @Column
+    @JsonView({PostOV.postSet.class, PostOV.postView.class})
     private String title;
 
     @Column(columnDefinition = "TEXT")
+    @JsonView({PostOV.postView.class})
     private String content;
 }

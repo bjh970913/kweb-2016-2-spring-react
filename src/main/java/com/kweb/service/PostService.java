@@ -21,9 +21,10 @@ public class PostService {
     private UserService userService;
 
     @Autowired
-    public PostService(BoardService boardService, PostRepo postRepo) {
-        this.boardService = boardService;
+    public PostService(PostRepo postRepo, BoardService boardService, UserService userService) {
         this.postRepo = postRepo;
+        this.boardService = boardService;
+        this.userService = userService;
     }
 
     public Post writePost(long boardId, String title, String content) {
@@ -56,13 +57,13 @@ public class PostService {
         return true;
     }
 
-    public Post getPostsById(long id) {
+    public Post getPostById(long id) {
         return postRepo.findById(id);
     }
 
     public Set<Post> getPostsByBoardId(long boardId) {
         Board board = boardService.getBoardById(boardId);
-        return board.getPosts();
+        return postRepo.findByBoard(board);
     }
 
     public Set<Post> sarchPostsByTitle(String title) {

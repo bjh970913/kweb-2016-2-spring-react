@@ -3,6 +3,11 @@
  */
 let React = require('react')
 let ReactDOM = require('react-dom')
+let $ = require('jquery')
+
+window.$ = $
+
+console.log($)
 
 function Item (props) {
   return (<li>{props.message}</li>);

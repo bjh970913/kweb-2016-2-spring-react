@@ -2,11 +2,13 @@ package com.kweb.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.kweb.config.jsonView.BoardOV;
+import com.kweb.config.jsonView.PostOV;
 import com.kweb.model.Board;
 import com.kweb.model.Post;
 import com.kweb.service.BoardService;
 import com.kweb.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,9 +39,10 @@ public class BoardCtrl {
         return boardService.getBoardList();
     }
 
-    @GetMapping(value = "/board/post/{id}", produces = "application/json")
+    @GetMapping(value = "/board/post/{boardId}", produces = "application/json")
     @ResponseBody
-    public Set<Post> getBoardPosts(@PathVariable("id") long id) {
-        return postService.getPostsByBoardId(id);
+    @JsonView(PostOV.postSet.class)
+    public Set<Post> getBoardPosts(@PathVariable("boardId") long boardId) {
+        return postService.getPostsByBoardId(boardId);
     }
 }
